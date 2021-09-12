@@ -21,6 +21,7 @@ test
 
 .npmignore
 .prettierignore
+.eslintrc.json
 leaveCoverageTotalOnly.js
 rollup.config.js
 testStats.md
