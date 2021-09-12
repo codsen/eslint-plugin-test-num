@@ -96,6 +96,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "np": "^7.5.0",
+    "prettier": "^2.4.0",
     "rollup": "^2.53.2",
     "rollup-plugin-ascii": "^0.0.3",
     "rollup-plugin-banner": "^0.2.1",
