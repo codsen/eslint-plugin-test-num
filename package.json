@@ -51,10 +51,6 @@
   },
   "tap": {
     "check-coverage": false,
-    "coverage-report": [
-      "json-summary",
-      "text"
-    ],
     "node-arg": [
       "--no-warnings"
     ],

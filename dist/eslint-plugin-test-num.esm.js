@@ -1,7 +1,7 @@
 /**
  * @name eslint-plugin-test-num
  * @fileoverview ESLint plugin to update unit test numbers automatically
- * @version 2.0.0
+ * @version 2.0.1
  * @author Roy Revelt, Codsen Ltd
  * @license MIT
  * {@link https://codsen.com/os/eslint-plugin-test-num/}
@@ -25,7 +25,8 @@ function prep(str, originalOpts) {
   let lastDigitAt = null;
   for (let i = 0, len = str.length; i <= len; i++) {
     if (
-    digitsChunkStartsAt !== null && typeof lastDigitAt === "number" && (str[i] && str[i].trim().length &&
+    digitsChunkStartsAt !== null && typeof lastDigitAt === "number" && (
+    str[i] && str[i].trim().length &&
     !/\d/.test(str[i]) &&
     !["."].includes(str[i]) ||
     !str[i])) {

@@ -1,7 +1,7 @@
 /**
  * @name eslint-plugin-test-num
  * @fileoverview ESLint plugin to update unit test numbers automatically
- * @version 2.0.0
+ * @version 2.0.1
  * @author Roy Revelt, Codsen Ltd
  * @license MIT
  * {@link https://codsen.com/os/eslint-plugin-test-num/}
@@ -31,7 +31,8 @@ function prep(str, originalOpts) {
   let lastDigitAt = null;
   for (let i = 0, len = str.length; i <= len; i++) {
     if (
-    digitsChunkStartsAt !== null && typeof lastDigitAt === "number" && (str[i] && str[i].trim().length &&
+    digitsChunkStartsAt !== null && typeof lastDigitAt === "number" && (
+    str[i] && str[i].trim().length &&
     !/\d/.test(str[i]) &&
     !["."].includes(str[i]) ||
     !str[i])) {
@@ -67,14 +68,14 @@ const create = context => {
   let counter = 0;
   return {
     ExpressionStatement(node) {
-      if (op__default['default'].get(node, "expression.type") === "CallExpression" && ["test", "only", "skip", "todo"].includes(op__default['default'].get(node, "expression.callee.property.name")) && ["TemplateLiteral", "Literal"].includes(op__default['default'].get(node, "expression.arguments.0.type"))) {
+      if (op__default["default"].get(node, "expression.type") === "CallExpression" && ["test", "only", "skip", "todo"].includes(op__default["default"].get(node, "expression.callee.property.name")) && ["TemplateLiteral", "Literal"].includes(op__default["default"].get(node, "expression.arguments.0.type"))) {
         counter += 1;
         const testOrderNumber = `${counter}`.padStart(2, "0");
         let finalDigitChunk = {};
-        if (!finalDigitChunk.value && op__default['default'].get(node, "expression.arguments.0.type") === "TemplateLiteral" && op__default['default'].has(node, "expression.arguments.0.quasis.0.value.raw")) {
-          const offset1 = op__default['default'].get(node, "expression.arguments.0.quasis.0.start");
-          const offset2 = op__default['default'].get(node, "expression.arguments.0.range.0") + 1;
-          const source = op__default['default'].get(node, "expression.arguments.0.quasis.0.value.raw");
+        if (!finalDigitChunk.value && op__default["default"].get(node, "expression.arguments.0.type") === "TemplateLiteral" && op__default["default"].has(node, "expression.arguments.0.quasis.0.value.raw")) {
+          const offset1 = op__default["default"].get(node, "expression.arguments.0.quasis.0.start");
+          const offset2 = op__default["default"].get(node, "expression.arguments.0.range.0") + 1;
+          const source = op__default["default"].get(node, "expression.arguments.0.quasis.0.value.raw");
           prep(source, {
             offset: offset1 || offset2,
             returnRangesOnly: true
@@ -92,13 +93,13 @@ const create = context => {
               start,
               end,
               value: testOrderNumber,
-              node: op__default['default'].get(node, "expression.arguments.0.quasis.0")
+              node: op__default["default"].get(node, "expression.arguments.0.quasis.0")
             };
           }
         }
         if (!finalDigitChunk.value && node.expression.arguments[0].type === "Literal" && node.expression.arguments[0].raw) {
-          const offset1 = op__default['default'].get(node, "expression.arguments.0.start");
-          const offset2 = op__default['default'].get(node, "expression.arguments.0.range.0");
+          const offset1 = op__default["default"].get(node, "expression.arguments.0.start");
+          const offset2 = op__default["default"].get(node, "expression.arguments.0.range.0");
           const {
             start,
             end,
@@ -116,30 +117,30 @@ const create = context => {
             };
           }
         }
-        if (!finalDigitChunk.value && op__default['default'].get(node, "expression.arguments.1.type") === "ArrowFunctionExpression" && op__default['default'].get(node, "expression.arguments.1.body.type") === "BlockStatement" && op__default['default'].get(node, "expression.arguments.1.body.body").length) {
+        if (!finalDigitChunk.value && op__default["default"].get(node, "expression.arguments.1.type") === "ArrowFunctionExpression" && op__default["default"].get(node, "expression.arguments.1.body.type") === "BlockStatement" && op__default["default"].get(node, "expression.arguments.1.body.body").length) {
           let subTestCount = "multiple";
           let filteredExpressionStatements = [];
-          if ((filteredExpressionStatements = op__default['default'].get(node, "expression.arguments.1.body.body").filter(nodeObj => nodeObj.type === "ExpressionStatement" && op__default['default'].get(nodeObj, "expression.callee.object.name") === "t")).length === 2 &&
-          op__default['default'].get(filteredExpressionStatements[filteredExpressionStatements.length - 1], "expression.callee.property.name") === "end") {
+          if ((filteredExpressionStatements = op__default["default"].get(node, "expression.arguments.1.body.body").filter(nodeObj => nodeObj.type === "ExpressionStatement" && op__default["default"].get(nodeObj, "expression.callee.object.name") === "t")).length === 2 &&
+          op__default["default"].get(filteredExpressionStatements[filteredExpressionStatements.length - 1], "expression.callee.property.name") === "end") {
             subTestCount = "single";
           }
-          const exprStatements = op__default['default'].get(node, "expression.arguments.1.body.body");
+          const exprStatements = op__default["default"].get(node, "expression.arguments.1.body.body");
           /* istanbul ignore else */
           if (Array.isArray(exprStatements)) {
             let counter2 = 0;
             for (let i = 0, len = exprStatements.length; i < len; i++) {
-              const assertsName = op__default['default'].get(exprStatements[i], "expression.callee.property.name");
+              const assertsName = op__default["default"].get(exprStatements[i], "expression.callee.property.name");
               if (!assertsName) {
                 continue;
               }
               let messageArgsPositionWeWillAimFor;
               if (
               messageIsThirdArg.has(assertsName) &&
-              op__default['default'].has(exprStatements[i], "expression.arguments.2")) {
+              op__default["default"].has(exprStatements[i], "expression.arguments.2")) {
                 messageArgsPositionWeWillAimFor = 2;
               } else if (
               messageIsSecondArg.has(assertsName) &&
-              op__default['default'].has(exprStatements[i], "expression.arguments.1")) {
+              op__default["default"].has(exprStatements[i], "expression.arguments.1")) {
                 messageArgsPositionWeWillAimFor = 1;
               }
               if (messageArgsPositionWeWillAimFor) {
@@ -147,17 +148,17 @@ const create = context => {
                 let rawPathToMsgArgValue = "";
                 let pathToMsgArgStart;
                 /* istanbul ignore else */
-                if (op__default['default'].get(exprStatements[i], `expression.arguments.${messageArgsPositionWeWillAimFor}.type`) === "TemplateLiteral") {
+                if (op__default["default"].get(exprStatements[i], `expression.arguments.${messageArgsPositionWeWillAimFor}.type`) === "TemplateLiteral") {
                   rawPathToMsgArgValue = `expression.arguments.${messageArgsPositionWeWillAimFor}.quasis.0`;
-                  pathToMsgArgValue = op__default['default'].get(exprStatements[i], `${rawPathToMsgArgValue}.value.raw`);
-                  pathToMsgArgStart = op__default['default'].get(exprStatements[i], `${rawPathToMsgArgValue}.start`);
+                  pathToMsgArgValue = op__default["default"].get(exprStatements[i], `${rawPathToMsgArgValue}.value.raw`);
+                  pathToMsgArgStart = op__default["default"].get(exprStatements[i], `${rawPathToMsgArgValue}.start`);
                   counter2 += 1;
-                } else if (op__default['default'].get(exprStatements[i], `expression.arguments.${messageArgsPositionWeWillAimFor}.type`) === "Literal") {
+                } else if (op__default["default"].get(exprStatements[i], `expression.arguments.${messageArgsPositionWeWillAimFor}.type`) === "Literal") {
                   rawPathToMsgArgValue = `expression.arguments.${messageArgsPositionWeWillAimFor}`;
-                  pathToMsgArgValue = op__default['default'].get(exprStatements[i], `${rawPathToMsgArgValue}.raw`);
+                  pathToMsgArgValue = op__default["default"].get(exprStatements[i], `${rawPathToMsgArgValue}.raw`);
                   pathToMsgArgStart =
-                  op__default['default'].get(exprStatements[i], `${rawPathToMsgArgValue}.start`) ||
-                  op__default['default'].get(exprStatements[i], `${rawPathToMsgArgValue}.range.0`);
+                  op__default["default"].get(exprStatements[i], `${rawPathToMsgArgValue}.start`) ||
+                  op__default["default"].get(exprStatements[i], `${rawPathToMsgArgValue}.range.0`);
                   counter2 += 1;
                 }
                 const {
@@ -173,7 +174,7 @@ const create = context => {
                 const newValue = getNewValue(subTestCount, testOrderNumber, counter2);
                 if (rawPathToMsgArgValue && prep(pathToMsgArgValue).value !== newValue) {
                   context.report({
-                    node: op__default['default'].get(exprStatements[i], rawPathToMsgArgValue),
+                    node: op__default["default"].get(exprStatements[i], rawPathToMsgArgValue),
                     messageId: "correctTestNum",
                     fix: fixerObj => {
                       return fixerObj.replaceTextRange([start, end], newValue);
@@ -184,15 +185,15 @@ const create = context => {
                 let positionDecided;
                 if (
                 messageIsThirdArg.has(assertsName) &&
-                Array.isArray(op__default['default'].get(exprStatements[i], "expression.arguments")) && op__default['default'].get(exprStatements[i], "expression.arguments").length === 2) {
+                Array.isArray(op__default["default"].get(exprStatements[i], "expression.arguments")) && op__default["default"].get(exprStatements[i], "expression.arguments").length === 2) {
                   positionDecided = 2;
-                } else if (messageIsSecondArg.has(assertsName) && Array.isArray(op__default['default'].get(exprStatements[i], "expression.arguments")) && op__default['default'].get(exprStatements[i], "expression.arguments").length === 1) {
+                } else if (messageIsSecondArg.has(assertsName) && Array.isArray(op__default["default"].get(exprStatements[i], "expression.arguments")) && op__default["default"].get(exprStatements[i], "expression.arguments").length === 1) {
                   positionDecided = 1;
                 }
                 if (positionDecided) {
                   const positionToInsertAt =
-                  (op__default['default'].get(exprStatements[i], "expression.end") ||
-                  op__default['default'].get(exprStatements[i], "expression.range.1")) - 1;
+                  (op__default["default"].get(exprStatements[i], "expression.end") ||
+                  op__default["default"].get(exprStatements[i], "expression.range.1")) - 1;
                   const newValue = getNewValue(subTestCount, testOrderNumber, counter2);
                   const wholeSourceStr = context.getSourceCode().getText();
                   const endIdx = positionToInsertAt;
