@@ -29,7 +29,7 @@ tap.test(
     // accidentally processed as real JS source files during some find-and-replace
     // went wrong scenarios
     const input = read("01-in");
-    t.is(
+    t.equal(
       sha256(input),
       "ac32ddfd3670f39ce2f55ce674f99850989e1fe1958c49c5348ba7a87a1534ab",
       "01.01 - inputs were mangled!"
@@ -56,7 +56,7 @@ tap.test(
   `02 - ${`\u001b[${33}m${`basic`}\u001b[${39}m`} - grouped asserts`,
   (t) => {
     const input = read("02-in");
-    t.is(
+    t.equal(
       sha256(input),
       "270b1a851a24884d2aa870aa400271289daa98bd9ef3f369a810485571181e1d",
       "02.01 - inputs were mangled!"
@@ -82,7 +82,7 @@ tap.test(
 
 tap.test(`03 - ${`\u001b[${33}m${`basic`}\u001b[${39}m`} - edge cases`, (t) => {
   const input = read("03-in");
-  t.is(
+  t.equal(
     sha256(input),
     "ee2b27660e5d0e3932803a3a4cd82c1cf861b5902bfc7eaa3341d23fb6639cba",
     "03.01 - inputs were mangled!"
@@ -107,7 +107,7 @@ tap.test(`03 - ${`\u001b[${33}m${`basic`}\u001b[${39}m`} - edge cases`, (t) => {
 
 tap.test(`04 - ${`\u001b[${33}m${`basic`}\u001b[${39}m`} - edge cases`, (t) => {
   const input = read("04-in");
-  t.is(
+  t.equal(
     sha256(input),
     "447e5621c37f92bc95a3e5595574dfc2a7939849d053ca0f66ee0b74fd6b106c",
     "04.01 - inputs were mangled!"
@@ -132,7 +132,7 @@ tap.test(`04 - ${`\u001b[${33}m${`basic`}\u001b[${39}m`} - edge cases`, (t) => {
 
 tap.test(`05 - ${`\u001b[${33}m${`basic`}\u001b[${39}m`} - edge cases`, (t) => {
   const input = read("05-in");
-  t.is(
+  t.equal(
     sha256(input),
     "01288e3b3217526061615abf7f76040c6192225996cb80bf76cb90d5459daec1",
     "05.01 - inputs were mangled!"
@@ -157,7 +157,7 @@ tap.test(`05 - ${`\u001b[${33}m${`basic`}\u001b[${39}m`} - edge cases`, (t) => {
 
 tap.test(`06 - ${`\u001b[${33}m${`basic`}\u001b[${39}m`} - edge cases`, (t) => {
   const input = read("06-in");
-  t.is(
+  t.equal(
     sha256(input),
     "1ed7b5e97f46b5e10d55c68ec76a59908d7ad083daae12c0b5b8503fe3a2398e",
     "06.01 - inputs were mangled!"
@@ -183,7 +183,7 @@ tap.test(
   `07 - ${`\u001b[${33}m${`basic`}\u001b[${39}m`} - more complex code to be disregarded inside test`,
   (t) => {
     const input = read("10-in");
-    t.is(
+    t.equal(
       sha256(input),
       "e920867a63a9d0f4c3d9ee9990517514106dcadd3e94daaabaff3fc43377bc00",
       "07.01 - inputs were mangled!"

@@ -84,7 +84,7 @@ tap.test(
   (t) => {
     // ensure "in" is fixed
     const resIn = verifyAndFix(t, read("08-in"), c);
-    t.is(resIn.output, read("08-out"), "02.01");
+    t.equal(resIn.output, read("08-out"), "02.01");
 
     // ensure no more errors are raised about "out"
     const messages = verify(t, read("08-out"), c);
@@ -98,7 +98,7 @@ tap.test(
   (t) => {
     // ensure "in" is fixed
     const resIn = verifyAndFix(t, read("09-in"), c);
-    t.is(resIn.output, read("09-out"), "03.01");
+    t.equal(resIn.output, read("09-out"), "03.01");
 
     // ensure no more errors are raised about "out"
     const messages = verify(t, read("09-out"), c);
@@ -257,7 +257,7 @@ tap.test(`07 - testing TS parser directly`, (t) => {
   tsLinter.defineParser("@typescript-eslint/parser", parser);
 
   const input = `tap.test("99", (t) => {
-  t.is("ok", "ok", "01");
+  t.equal("ok", "ok", "01");
   t.end();
 });`;
 
@@ -301,7 +301,7 @@ tap.test(`08 - testing TS parser directly`, (t) => {
   tsLinter.defineParser("@typescript-eslint/parser", parser);
 
   const input = `tap.test("01", (t) => {
-  t.is("ok", "ok", "99");
+  t.equal("ok", "ok", "99");
   t.end();
 });`;
 
@@ -342,7 +342,7 @@ tap.test(`09 - testing TS parser directly - baseline`, (t) => {
   // linter.defineParser("@typescript-eslint/parser", parser);
 
   const input = `tap.test(\`9 - a\`, (t) => {
-  t.is("ok", "ok", "01");
+  t.equal("ok", "ok", "01");
   t.end();
 });`;
 
@@ -386,7 +386,7 @@ tap.test(`10 - testing TS parser directly - TS`, (t) => {
   tsLinter.defineParser("@typescript-eslint/parser", parser);
 
   const input = `tap.test(\`9 - a\`, (t) => {
-  t.is("ok", "ok", "01");
+  t.equal("ok", "ok", "01");
   t.end();
 });`;
 
